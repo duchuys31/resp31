@@ -105,6 +105,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -150,6 +166,46 @@
         "description": "rest_framework.response",
         "isExtraImport": true,
         "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "OpenAI",
+        "importPath": "openai",
+        "description": "openai",
+        "isExtraImport": true,
+        "detail": "openai",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "Customer",
+        "importPath": "customer.models",
+        "description": "customer.models",
+        "isExtraImport": true,
+        "detail": "customer.models",
         "documentation": {}
     },
     {
@@ -377,6 +433,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0002_alter_customer_language",
+        "description": "customer.migrations.0002_alter_customer_language",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='customer',\n            name='language',\n            field=models.TextField(default='Vietnamese'),\n        ),",
+        "detail": "customer.migrations.0002_alter_customer_language",
+        "documentation": {}
+    },
+    {
         "label": "CustomerConfig",
         "kind": 6,
         "importPath": "customer.apps",
@@ -390,7 +455,7 @@
         "kind": 6,
         "importPath": "customer.models",
         "description": "customer.models",
-        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"vn\")",
+        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")",
         "detail": "customer.models",
         "documentation": {}
     },
@@ -408,7 +473,16 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def test(request):\n    print(request.data)\n    return Response({\"set_attributes\": {\"message\": \"test\"}})",
+        "peekOfCode": "def test(request):\n    print(request.data)\n    try:\n        customer = Customer.objects.get(sender_id=request.data['sender_id'])\n    except:\n        customer = Customer.objects.create(sender_id=request.data['sender_id'])\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text:\n    [{request.data['sender_input']}]\n    Return the answer with the key 'language'.",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "client = OpenAI(api_key=os.environ.get(\"OPENAI_APIKEY\"))\n@api_view(['POST'])\ndef test(request):\n    print(request.data)\n    try:\n        customer = Customer.objects.get(sender_id=request.data['sender_id'])\n    except:\n        customer = Customer.objects.create(sender_id=request.data['sender_id'])\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text:",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -500,6 +574,33 @@
         "description": "manage",
         "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chatbot.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
         "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "client = OpenAI(api_key=os.environ.get(\"OPENAI_APIKEY\"))\nprompt = \"\"\"\nI have the following text, help me identify the language used in this text:\n[Wi-Fi is a family of wireless network protocols based on the IEEE 802.11 family of standards, which are commonly used for local area networking of devices and Internet access, allowing nearby digital devices to exchange data by radio waves.]\nReturn the answer with the key 'language'.\n\"\"\"\nresponse = client.chat.completions.create(\n  model=\"gpt-3.5-turbo-1106\",\n  response_format={ \"type\": \"json_object\" },\n  messages=[",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "prompt",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "prompt = \"\"\"\nI have the following text, help me identify the language used in this text:\n[Wi-Fi is a family of wireless network protocols based on the IEEE 802.11 family of standards, which are commonly used for local area networking of devices and Internet access, allowing nearby digital devices to exchange data by radio waves.]\nReturn the answer with the key 'language'.\n\"\"\"\nresponse = client.chat.completions.create(\n  model=\"gpt-3.5-turbo-1106\",\n  response_format={ \"type\": \"json_object\" },\n  messages=[\n    {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "response",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "response = client.chat.completions.create(\n  model=\"gpt-3.5-turbo-1106\",\n  response_format={ \"type\": \"json_object\" },\n  messages=[\n    {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},\n    {\"role\": \"user\", \"content\": prompt}\n  ]\n)\nprint(response.choices[0].message.content)",
+        "detail": "test",
         "documentation": {}
     }
 ]
