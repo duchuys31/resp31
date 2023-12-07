@@ -5,6 +5,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 from customer.models import Customer
+import json
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
 
@@ -30,14 +31,14 @@ def test(request):
             {"role": "user", "content": prompt}
         ]
     )
-    
+    data = json.loads(response.choices[0].message.content)    
     try:
-        customer.language = response.choices[0].message.content["language"]
+        customer.language = data['language']
     except Exception as e: 
         print(str(e))
     
     prompt = f"""
-    I have the following text, help me translate this text into Vietnamese:
+    I have the following text, help me translate this text into {customer.language}:
     [{request.data['message']}]
     Return the answer with the key 'translate'.
     """
@@ -50,7 +51,8 @@ def test(request):
             {"role": "user", "content": prompt}
         ]
     )
-    print(response.choices[0].message.content["translate"])
+    data = json.loads(response.choices[0].message.content)
+    print(response.choices[0].message.content)
     
     
-    return Response({"set_attributes": {"message": str(response.choices[0].message.content["translate"])}})
+    return Response({"set_attributes": {"message": data['translate']}})
