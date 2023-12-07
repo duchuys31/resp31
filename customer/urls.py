@@ -18,5 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 urlpatterns = [
-    path('test', views.test),
+    path('change_message', views.change_message),
+    path('change_menu', views.change_menu),
+    
 ]
