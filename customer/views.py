@@ -7,4 +7,5 @@ from rest_framework.response import Response
 @api_view(['POST'])
 def test(request):
     print(request.data)
-    return Response({"message": "Success"})
+    
+    return Response({"set_attributes": {"message": "test"}})

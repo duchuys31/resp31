@@ -408,7 +408,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def test(request):\n    print(request.data)\n    return Response({\"message\": \"Success\"})",
+        "peekOfCode": "def test(request):\n    print(request.data)\n    return Response({\"set_attributes\": {\"message\": \"test\"}})",
         "detail": "customer.views",
         "documentation": {}
     },
