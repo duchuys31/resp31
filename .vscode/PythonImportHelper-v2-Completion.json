@@ -234,14 +234,6 @@
         "documentation": {}
     },
     {
-        "label": "prompt",
-        "importPath": "test",
-        "description": "test",
-        "isExtraImport": true,
-        "detail": "test",
-        "documentation": {}
-    },
-    {
         "label": "annotations",
         "importPath": "__future__",
         "description": "__future__",

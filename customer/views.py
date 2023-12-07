@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 import os
 from customer.models import Customer
 import json
-from test import prompt
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
 
