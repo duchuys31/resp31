@@ -1,0 +1,13 @@
+asgiref==3.7.2
+attrs==23.1.0
+Django==4.2.7
+djangorestframework==3.14.0
+inflection==0.5.1
+jsonschema==4.20.0
+jsonschema-specifications==2023.11.1
+pytz==2023.3.post1
+PyYAML==6.0.1
+referencing==0.31.0
+rpds-py==0.13.1
+sqlparse==0.4.4
+uritemplate==4.1.1
