@@ -50,6 +50,7 @@ def test(request):
             {"role": "user", "content": prompt}
         ]
     )
+    print(response.choices[0].message.content["translate"])
     
     
-    return Response({"set_attributes": {"message": response.choices[0].message.content["translate"]}})
+    return Response({"set_attributes": {"message": str(response.choices[0].message.content["translate"])}})
