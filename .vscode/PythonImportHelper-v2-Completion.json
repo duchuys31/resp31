@@ -534,7 +534,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    Return to me a new dictionary with the values that have been changed according to the following format:\n    [{content_format}]\n    For the datetime key, if a value is missing, format it according to the existing values.\n    Back to the original format dictionary.\n    \"\"\"\n    return gpt(prompt)",
+        "peekOfCode": "def clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    Return to me a new dictionary with the values that have been changed according to the following format:\n    [{content_format}]\n    For the datetime key, if a value is missing, format it according to the existing values.\n    Back to the original format dictionary.\n    \"\"\"\n    print(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
