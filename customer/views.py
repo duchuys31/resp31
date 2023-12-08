@@ -46,7 +46,7 @@ def clean_text(content, content_format):
     Return to me a new dictionary with the values that have been changed according to the following format:
     [{content_format}]
     For the datetime key, if a value is missing, format it according to the existing values.
-    Back to the original format dictionary.
+    Return the original dictionary with the values formatted.
     """
     print(prompt)
     return gpt(prompt)
