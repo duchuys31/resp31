@@ -38,6 +38,16 @@ def translate_language(customer, content):
     Return the answer with unchanged keys and translated values.
     """
     return gpt(prompt)
+
+def clean_text(content, content_format): 
+    prompt = f"""
+    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
+    [{content}]
+    Return to me a new dictionary with the values that have been changed according to the following format:
+    [{content_format}]
+    For the datetime key, if a value is missing, format it according to the existing values.
+    """
+    return gpt(prompt)
     
 
 @api_view(['POST'])
@@ -58,6 +68,31 @@ def change_menu(request):
         return Response({"set_attributes":  translate_language(customer, to_translate)}) 
     except: 
         return Response({"set_attributes": json.loads(to_translate)}) 
+
+@api_view(['POST'])
+def clean_data(request):
+    customer = request.customer  
+    content = json.dumps(
+        {
+            'datetime': request.data['datetime'], 
+            'number': request.data['number'],
+            'name': request.data['name'], 
+            'phone': request.data['phone']
+        }
+    )
+    content_format = json.dumps(
+        {
+            'datetime': '%d-%m-%Y %H:%M:%S', 
+            'number': 'number',
+            'name': 'text', 
+            'phone': 'text'
+        }
+    )
+    resp = clean_text(content, content_format)
+    try:
+        return Response({'set_attributes': resp})
+    except:
+        return Response({'set_attributes': json.loads(content)})
     
     
     

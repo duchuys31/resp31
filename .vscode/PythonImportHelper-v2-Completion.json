@@ -525,7 +525,16 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return gpt(prompt)\n@api_view(['POST'])\ndef change_message(request):\n    customer = request.customer",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return gpt(prompt)\ndef clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "clean_text",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    Return to me a new dictionary with the values that have been changed according to the following format:\n    [{content_format}]\n    For the datetime key, if a value is missing, format it according to the existing values.\n    \"\"\"\n    return gpt(prompt)\n@api_view(['POST'])",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -543,7 +552,16 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)})",
+        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "clean_data",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def clean_data(request):\n    customer = request.customer  \n    content = json.dumps(\n        {\n            'datetime': request.data['datetime'], \n            'number': request.data['number'],\n            'name': request.data['name'], \n            'phone': request.data['phone']\n        }\n    )",
         "detail": "customer.views",
         "documentation": {}
     },
