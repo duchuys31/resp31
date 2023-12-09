@@ -42,6 +42,7 @@ def translate_language(customer, content):
     [{content}]
     For value, capitalize the first letter of the sentence and after punctuation if present.
     Return the answer with unchanged keys and translated values.
+    Return the only dict answer with the key 'result'.
     """
     return openai(prompt)
 
@@ -62,7 +63,7 @@ def change_message(request):
     customer = request.customer
     to_translate = json.dumps({'message': request.data['message']}) 
     try:
-        return Response({"set_attributes":  translate_language(customer, to_translate)}) 
+        return Response({"set_attributes":  translate_language(customer, to_translate)['result']}) 
     except: 
         return Response({"set_attributes": json.loads(to_translate)}) 
         
@@ -75,7 +76,7 @@ def change_menu(request):
     to_translate.pop('sender_input')
     to_translate = json.dumps(to_translate)  
     try:
-        return Response({"set_attributes":  translate_language(customer, to_translate)}) 
+        return Response({"set_attributes":  translate_language(customer, to_translate)['result']}) 
     except: 
         return Response({"set_attributes": json.loads(to_translate)}) 
 
