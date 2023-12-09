@@ -42,7 +42,7 @@ def translate_language(customer, content):
     [{content}]
     For value, capitalize the first letter of the sentence and after punctuation if present.
     Return the answer with unchanged keys and translated values.
-    Return the only dict answer with the key 'result'.
+    Return the only dict answer with the key 'result' and not use [].
     """
     return openai(prompt)
 

@@ -591,7 +591,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    For value, capitalize the first letter of the sentence and after punctuation if present.\n    Return the answer with unchanged keys and translated values.\n    Return the only dict answer with the key 'result'.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): ",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    For value, capitalize the first letter of the sentence and after punctuation if present.\n    Return the answer with unchanged keys and translated values.\n    Return the only dict answer with the key 'result' and not use [].\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): ",
         "detail": "customer.views",
         "documentation": {}
     },
