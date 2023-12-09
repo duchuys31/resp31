@@ -43,9 +43,6 @@ def translate_language(customer, content):
     return openai(prompt)
 
 def clean_text(content): 
-    time_now = datetime.now()
-    time_now = time_now.strftime("%d-%m-%Y")
-    print(time_now)
     prompt = f"""
     I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
     [{content}]
@@ -81,10 +78,10 @@ def clean_data(request):
     customer = request.customer  
     content = json.dumps(
         {
-            'order_date': request.data['datetime'], 
-            'number_people': request.data['number'],
-            'name_people': request.data['name'], 
-            'phone_people': request.data['phone']
+            'order_date': request.data['order_date'], 
+            'number_people': request.data['number_people'],
+            'name_people': request.data['name_people'], 
+            'phone_people': request.data['phone_people']
         }
     )
     resp = clean_text(content)

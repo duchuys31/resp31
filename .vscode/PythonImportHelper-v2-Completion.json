@@ -549,7 +549,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): \n    time_now = datetime.now()\n    time_now = time_now.strftime(\"%d-%m-%Y\")",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -558,7 +558,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content): \n    time_now = datetime.now()\n    time_now = time_now.strftime(\"%d-%m-%Y\")\n    print(time_now)\n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the answer with the key 'result'.",
+        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -585,7 +585,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_data(request):\n    customer = request.customer  \n    content = json.dumps(\n        {\n            'order_date': request.data['datetime'], \n            'number_people': request.data['number'],\n            'name_people': request.data['name'], \n            'phone_people': request.data['phone']\n        }\n    )",
+        "peekOfCode": "def clean_data(request):\n    customer = request.customer  \n    content = json.dumps(\n        {\n            'order_date': request.data['order_date'], \n            'number_people': request.data['number_people'],\n            'name_people': request.data['name_people'], \n            'phone_people': request.data['phone_people']\n        }\n    )",
         "detail": "customer.views",
         "documentation": {}
     },
