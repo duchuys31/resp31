@@ -30,7 +30,7 @@ def openai(prompt):
  
 def detech_language(content):
     prompt = f"""
-    I have the following text, help me identify the language used in this text, provide the most common language.:
+    I have the following text, help me identify the language used in this text, provide the most common language:
     [{content}]
     Return the answer with the key 'language'.
     """
@@ -40,6 +40,7 @@ def translate_language(customer, content):
     prompt = f"""
     I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:
     [{content}]
+    For value, capitalize the first letter of the sentence and after punctuation if present.
     Return the answer with unchanged keys and translated values.
     """
     return openai(prompt)

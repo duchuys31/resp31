@@ -582,7 +582,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language.:\n    [{content}]\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:",
+        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language:\n    [{content}]\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -591,7 +591,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    For value, capitalize the first letter of the sentence and after punctuation if present.\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content): \n    prompt = f\"\"\"",
         "detail": "customer.views",
         "documentation": {}
     },
