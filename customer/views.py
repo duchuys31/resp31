@@ -42,15 +42,15 @@ def translate_language(customer, content):
     """
     return openai(prompt)
 
-def clean_text(content, content_format): 
+def clean_text(content): 
     time_now = datetime.now()
     time_now = time_now.strftime("%d-%m-%Y")
     print(time_now)
     prompt = f"""
     I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
     [{content}]
-    - With the 'datetime' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
-    - With the key 'number,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
+    - With the 'order_date' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
+    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
     - Return the answer with the key 'result'.
     """
     print(prompt)
@@ -81,21 +81,13 @@ def clean_data(request):
     customer = request.customer  
     content = json.dumps(
         {
-            'datetime': request.data['datetime'], 
-            'number': request.data['number'],
-            'name': request.data['name'], 
-            'phone': request.data['phone']
+            'order_date': request.data['datetime'], 
+            'number_people': request.data['number'],
+            'name_people': request.data['name'], 
+            'phone_people': request.data['phone']
         }
     )
-    content_format = json.dumps(
-        {
-            'datetime': '%d-%m-%Y %H:%M:%S', 
-            'number': 'number',
-            'name': 'text', 
-            'phone': 'text'
-        }
-    )
-    resp = clean_text(content, content_format)
+    resp = clean_text(content)
     try:
         return Response({'set_attributes': resp['result']})
     except:
