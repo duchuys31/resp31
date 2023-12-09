@@ -129,7 +129,11 @@ def save_data(request):
     customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
     customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)
     customer.save()
-    return Response(status=200)
+    return Response({
+        'set_attributes': {
+            'success': 1
+        }
+    })
 
 @api_view(['GET'])
 def send_notifi(request): 
