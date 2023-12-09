@@ -49,7 +49,7 @@ def clean_text(content):
     [{content}]
     - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
     - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
-    - Return the dict answer with the key 'result'.
+    - Return the only dict answer with the key 'result'.
     """
     print(prompt)
     return openai(prompt)

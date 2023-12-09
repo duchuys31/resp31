@@ -592,7 +592,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the dict answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
+        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the only dict answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
