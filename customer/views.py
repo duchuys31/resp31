@@ -146,7 +146,19 @@ def save_data(request):
 
 @api_view(['GET'])
 def send_notifi(request): 
-    return Response(status=200)
+    customer = request.customer
+    time_now = datetime.now()
+    time_now = time_now.strftime('%d-%m-%Y %H:%M')
+    success = 1
+    
+    if time_now > customer.time_end:
+        success = 0
+    
+    return Response({
+        'set_attributes': {
+            'success': success
+        }
+    })
 
 
 

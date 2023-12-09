@@ -654,7 +654,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    return Response(status=200)",
+        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    time_now = time_now.strftime('%d-%m-%Y %H:%M')\n    success = 1\n    if time_now > customer.time_end:\n        success = 0\n    return Response({\n        'set_attributes': {\n            'success': success",
         "detail": "customer.views",
         "documentation": {}
     },
