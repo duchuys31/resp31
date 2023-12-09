@@ -21,4 +21,5 @@ urlpatterns = [
     path('change_message', views.change_message),
     path('change_menu', views.change_menu),
     path('clean_data', views.clean_data), 
+    path('send_notifi', views.send_notifi), 
 ]

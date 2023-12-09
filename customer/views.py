@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
+import time
 
 def openai(prompt):
     response = client.chat.completions.create(
@@ -90,6 +91,30 @@ def clean_data(request):
         return Response({'set_attributes': resp['result']})
     except:
         return Response({'set_attributes': json.loads(content)})
+
+@api_view(['POST'])
+def clean_data(request):
+    customer = request.customer  
+    content = json.dumps(
+        {
+            'order_date': request.data['order_date'], 
+            'order_date_end': request.data['order_date_end'], 
+            'number_people': request.data['number_people'],
+            'name_people': request.data['name_people'], 
+            'phone_people': request.data['phone_people']
+        }
+    )
+    resp = clean_text(content)
+    try:
+        return Response({'set_attributes': resp['result']})
+    except:
+        return Response({'set_attributes': json.loads(content)})
+
+@api_view(['GET'])
+def send_notifi(request): 
+    time.sleep(60)
+    return Response(status=200)
+
 
 
     
