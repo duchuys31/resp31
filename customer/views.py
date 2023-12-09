@@ -46,7 +46,7 @@ def clean_text(content):
     prompt = f"""
     I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
     [{content}]
-    - With the 'order_date' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
+    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
     - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
     - Return the answer with the key 'result'.
     """
@@ -79,6 +79,7 @@ def clean_data(request):
     content = json.dumps(
         {
             'order_date': request.data['order_date'], 
+            'order_date_end': request.data['order_date_end'], 
             'number_people': request.data['number_people'],
             'name_people': request.data['name_people'], 
             'phone_people': request.data['phone_people']
