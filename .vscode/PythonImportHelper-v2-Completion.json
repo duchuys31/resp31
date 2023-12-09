@@ -297,7 +297,7 @@
         "kind": 6,
         "importPath": "chatbot.middleware",
         "description": "chatbot.middleware",
-        "peekOfCode": "class CustomMiddleware:\n    def __init__(self, get_response):\n        self.get_response = get_response\n    def __call__(self, request):\n        data = json.loads(request.body)\n        print(data)\n        try:\n            customer = Customer.objects.get(sender_id=data['sender_id'])\n        except:\n            customer = Customer.objects.create(sender_id=data['sender_id'])",
+        "peekOfCode": "class CustomMiddleware:\n    def __init__(self, get_response):\n        self.get_response = get_response\n    def __call__(self, request):\n        try:\n            data = json.loads(request.body)\n            print(data)\n            try:\n                customer = Customer.objects.get(sender_id=data['sender_id'])\n            except:",
         "detail": "chatbot.middleware",
         "documentation": {}
     },
