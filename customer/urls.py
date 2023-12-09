@@ -20,5 +20,5 @@ from . import views
 urlpatterns = [
     path('change_message', views.change_message),
     path('change_menu', views.change_menu),
-    path('clean_data', views.clean_data)
+    path('clean_data', views.clean_data), 
 ]

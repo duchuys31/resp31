@@ -6,10 +6,13 @@ from dotenv import load_dotenv
 import os
 from customer.models import Customer
 import json
+from datetime import datetime
+from rest_framework.views import APIView
+from rest_framework.decorators import action
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
 
-def gpt(prompt):
+def openai(prompt):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-1106",
         response_format={ "type": "json_object" },
@@ -29,7 +32,7 @@ def detech_language(content):
     [{content}]
     Return the answer with the key 'language'.
     """
-    return gpt(prompt)
+    return openai(prompt)
 
 def translate_language(customer, content):
     prompt = f"""
@@ -37,19 +40,21 @@ def translate_language(customer, content):
     [{content}]
     Return the answer with unchanged keys and translated values.
     """
-    return gpt(prompt)
+    return openai(prompt)
 
 def clean_text(content, content_format): 
+    time_now = datetime.now()
+    time_now = time_now.strftime("%d-%m-%Y")
+    print(time_now)
     prompt = f"""
     I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
     [{content}]
-    Return to me a new dictionary with the values that have been changed according to the following format:
-    [{content_format}]
-    For the datetime key, if a value is missing, format it according to the existing values.
-    Return the only dictionary with the values formatted.
+    - With the 'datetime' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
+    - With the key 'number,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
+    - Return the answer with the key 'result'.
     """
     print(prompt)
-    return gpt(prompt)
+    return openai(prompt)
     
 
 @api_view(['POST'])
@@ -92,9 +97,11 @@ def clean_data(request):
     )
     resp = clean_text(content, content_format)
     try:
-        return Response({'set_attributes': resp})
+        return Response({'set_attributes': resp['result']})
     except:
         return Response({'set_attributes': json.loads(content)})
+
+
     
     
     

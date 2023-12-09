@@ -194,6 +194,14 @@
         "documentation": {}
     },
     {
+        "label": "action",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
         "label": "Response",
         "importPath": "rest_framework.response",
         "description": "rest_framework.response",
@@ -231,6 +239,22 @@
         "description": "dotenv",
         "isExtraImport": true,
         "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
         "documentation": {}
     },
     {
@@ -498,16 +522,16 @@
         "kind": 5,
         "importPath": "customer.urls",
         "description": "customer.urls",
-        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data)\n]",
+        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n]",
         "detail": "customer.urls",
         "documentation": {}
     },
     {
-        "label": "gpt",
+        "label": "openai",
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def gpt(prompt):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo-1106\",\n        response_format={ \"type\": \"json_object\" },\n        messages=[\n            {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    print(prompt)",
+        "peekOfCode": "def openai(prompt):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo-1106\",\n        response_format={ \"type\": \"json_object\" },\n        messages=[\n            {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )\n    print(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -516,7 +540,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language.:\n    [{content}]\n    Return the answer with the key 'language'.\n    \"\"\"\n    return gpt(prompt)\ndef translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:",
+        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language.:\n    [{content}]\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -525,7 +549,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return gpt(prompt)\ndef clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    Return the answer with unchanged keys and translated values.\n    \"\"\"\n    return openai(prompt)\ndef clean_text(content, content_format): \n    time_now = datetime.now()\n    time_now = time_now.strftime(\"%d-%m-%Y\")",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -534,7 +558,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content, content_format): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    Return to me a new dictionary with the values that have been changed according to the following format:\n    [{content_format}]\n    For the datetime key, if a value is missing, format it according to the existing values.\n    Return the only dictionary with the values formatted.\n    \"\"\"\n    print(prompt)",
+        "peekOfCode": "def clean_text(content, content_format): \n    time_now = datetime.now()\n    time_now = time_now.strftime(\"%d-%m-%Y\")\n    print(time_now)\n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'datetime' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the answer with the key 'result'.",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -570,7 +594,7 @@
         "kind": 5,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "client = OpenAI(api_key=os.environ.get(\"OPENAI_APIKEY\"))\ndef gpt(prompt):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo-1106\",\n        response_format={ \"type\": \"json_object\" },\n        messages=[\n            {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )",
+        "peekOfCode": "client = OpenAI(api_key=os.environ.get(\"OPENAI_APIKEY\"))\ndef openai(prompt):\n    response = client.chat.completions.create(\n        model=\"gpt-3.5-turbo-1106\",\n        response_format={ \"type\": \"json_object\" },\n        messages=[\n            {\"role\": \"system\", \"content\": \"You are a helpful assistant designed to output JSON.\"},\n            {\"role\": \"user\", \"content\": prompt}\n        ]\n    )",
         "detail": "customer.views",
         "documentation": {}
     },
