@@ -5,5 +5,7 @@ from django.db import models
 class Customer(models.Model): 
     sender_id = models.TextField(primary_key=True)
     language = models.TextField(default="Vietnamese")
-    
+    sum_reservation = models.IntegerField(default=0)
+    time_start = models.DateTimeField(null=True, blank=True)
+    time_end = models.DateTimeField(null=True, blank=True)
     

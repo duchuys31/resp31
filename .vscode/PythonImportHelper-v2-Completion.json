@@ -154,6 +154,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -509,6 +525,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0003_customer_sum_reservation_customer_time_end_and_more",
+        "description": "customer.migrations.0003_customer_sum_reservation_customer_time_end_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0002_alter_customer_language'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='customer',\n            name='sum_reservation',\n            field=models.IntegerField(default=0),\n        ),",
+        "detail": "customer.migrations.0003_customer_sum_reservation_customer_time_end_and_more",
+        "documentation": {}
+    },
+    {
         "label": "CustomerConfig",
         "kind": 6,
         "importPath": "customer.apps",
@@ -522,7 +547,7 @@
         "kind": 6,
         "importPath": "customer.models",
         "description": "customer.models",
-        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")",
+        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")\n    sum_reservation = models.IntegerField(default=0)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
         "detail": "customer.models",
         "documentation": {}
     },
@@ -585,7 +610,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu4': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
+        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -604,6 +629,15 @@
         "importPath": "customer.views",
         "description": "customer.views",
         "peekOfCode": "def clean_data(request):\n    customer = request.customer  \n    content = json.dumps(\n        {\n            'order_date': request.data['order_date'], \n            'order_date_end': request.data['order_date_end'], \n            'number_people': request.data['number_people'],\n            'name_people': request.data['name_people'], \n            'phone_people': request.data['phone_people']\n        }",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "save_data",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def save_data(request): \n    customer = request.customer\n    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')\n    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')\n    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)\n    customer.save()\n    return Response(status=200)\n@api_view(['GET'])\ndef send_notifi(request): \n    return Response(status=200)",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -612,7 +646,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    time.sleep(60)\n    return Response(status=200)",
+        "peekOfCode": "def send_notifi(request): \n    return Response(status=200)",
         "detail": "customer.views",
         "documentation": {}
     },

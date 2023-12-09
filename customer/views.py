@@ -68,7 +68,7 @@ def change_message(request):
 @api_view(['POST'])
 def change_menu(request): 
     customer = request.customer  
-    to_translate = json.dumps({'menu4': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) 
+    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) 
     try:
         return Response({"set_attributes":  translate_language(customer, to_translate)}) 
     except: 
@@ -106,13 +106,33 @@ def clean_data(request):
     )
     resp = clean_text(content)
     try:
+        try:
+            datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
+            datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
+            int(resp['result']['number_people'])
+        except Exception as e:
+            print(str(e))
+            return Response({
+                'set_sttributes': {
+                    'success': 0
+                }
+            })
+        resp['result']['success'] = 1
         return Response({'set_attributes': resp['result']})
     except:
         return Response({'set_attributes': json.loads(content)})
+    
+@api_view(['POST'])
+def save_data(request): 
+    customer = request.customer
+    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')
+    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
+    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)
+    customer.save()
+    return Response(status=200)
 
 @api_view(['GET'])
 def send_notifi(request): 
-    time.sleep(60)
     return Response(status=200)
 
 
