@@ -145,7 +145,7 @@ def save_data(request):
         'set_attributes': {
             'success': success,
             'number_order': customer.sum_reservation,
-            'residual': int(request.data['number_people']) % 4
+            'residual': 4 - int(request.data['number_people']) % 4
         }
     })
 
