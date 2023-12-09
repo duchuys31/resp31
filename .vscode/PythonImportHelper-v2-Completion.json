@@ -274,6 +274,14 @@
         "documentation": {}
     },
     {
+        "label": "Sum",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
         "label": "time",
         "kind": 6,
         "isExtraImport": true,
@@ -637,7 +645,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def save_data(request): \n    customer = request.customer\n    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')\n    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')\n    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)\n    customer.save()\n    return Response({\n        'set_attributes': {\n            'success': 1\n        }",
+        "peekOfCode": "def save_data(request): \n    customer = request.customer\n    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')\n    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')\n    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)\n    customers_in_range = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)\n    total_sum_reservation = customers_in_range.aggregate(Sum('sum_reservation'))['sum_reservation__sum']\n    if total_sum_reservation is None:\n        total_sum_reservation = 0\n    success = 1",
         "detail": "customer.views",
         "documentation": {}
     },

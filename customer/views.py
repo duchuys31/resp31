@@ -9,6 +9,7 @@ import json
 from datetime import datetime
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+from django.db.models import Sum
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
 import time
@@ -128,10 +129,18 @@ def save_data(request):
     customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')
     customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
     customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 == 0)
-    customer.save()
+    customers_in_range = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)
+    total_sum_reservation = customers_in_range.aggregate(Sum('sum_reservation'))['sum_reservation__sum']
+    if total_sum_reservation is None:
+        total_sum_reservation = 0
+    success = 1
+    if total_sum_reservation + customer.sum_reservation <= 10:
+        customer.save()
+    else: 
+        success = 0
     return Response({
         'set_attributes': {
-            'success': 1
+            'success': success
         }
     })
 
