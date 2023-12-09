@@ -609,7 +609,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_message(request):\n    customer = request.customer\n    to_translate = request.data\n    to_translate.pop('sender_id')\n    to_translate.pop('sender_input')\n    to_translate = json.dumps(to_translate) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) ",
+        "peekOfCode": "def change_message(request):\n    customer = request.customer\n    to_translate = json.dumps({'message': request.data['message']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef change_menu(request): \n    customer = request.customer",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -618,7 +618,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['order_info'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
+        "peekOfCode": "def change_menu(request): \n    customer = request.customer\n    to_translate = request.data\n    to_translate.pop('sender_id')\n    to_translate.pop('sender_input')\n    to_translate = json.dumps(to_translate)  \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) ",
         "detail": "customer.views",
         "documentation": {}
     },

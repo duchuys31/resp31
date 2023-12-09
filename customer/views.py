@@ -59,10 +59,7 @@ def clean_text(content):
 @api_view(['POST'])
 def change_message(request):
     customer = request.customer
-    to_translate = request.data
-    to_translate.pop('sender_id')
-    to_translate.pop('sender_input')
-    to_translate = json.dumps(to_translate) 
+    to_translate = json.dumps({'message': request.data['message']}) 
     try:
         return Response({"set_attributes":  translate_language(customer, to_translate)}) 
     except: 
@@ -71,8 +68,11 @@ def change_message(request):
 
 @api_view(['POST'])
 def change_menu(request): 
-    customer = request.customer  
-    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['order_info'], 'reservation': request.data['reservation']}) 
+    customer = request.customer
+    to_translate = request.data
+    to_translate.pop('sender_id')
+    to_translate.pop('sender_input')
+    to_translate = json.dumps(to_translate)  
     try:
         return Response({"set_attributes":  translate_language(customer, to_translate)}) 
     except: 
