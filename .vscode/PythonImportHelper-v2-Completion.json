@@ -558,7 +558,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
+        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the dict answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -576,7 +576,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
+        "peekOfCode": "def change_menu(request): \n    customer = request.customer  \n    to_translate = json.dumps({'menu4': request.data['menu'], 'contact': request.data['contact'], 'reservation': request.data['reservation']}) \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) \n@api_view(['POST'])\ndef clean_data(request):\n    customer = request.customer  ",
         "detail": "customer.views",
         "documentation": {}
     },
