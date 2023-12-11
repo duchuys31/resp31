@@ -118,7 +118,6 @@ def clean_data(request):
     try:
         try:
             time_now = datetime.now()
-            time_now = time_now.strftime('%d-%m-%Y %H:%M')
             start_time = datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
             end_time = datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
             if end_time < start_time or start_time < time_now:
@@ -196,7 +195,6 @@ def check(request):
 def send_notifi(request): 
     customer = request.customer
     time_now = datetime.now()
-    time_now = time_now.strftime('%d-%m-%Y %H:%M')
     two_hours_ago = time_now - timedelta(hours=2)
     success = 0
     histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)
