@@ -30,7 +30,7 @@ def openai(prompt):
  
 def detech_language(content):
     prompt = f"""
-    I have the following text, help me identify the language used in this text, provide the most common language:
+    I have the following text, help me identify the language used in this text is 'Vietnamese' or 'English', provide the most common language:
     [{content}]
     Provide the unique language (Ex: 'English')
     If unable to determine language, return value of language is ''.
