@@ -43,6 +43,7 @@ def translate_language(customer, content):
     I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:
     [{content}]
     For value, capitalize the first letter of the sentence and after punctuation if present.
+    Return values by {customer.language}
     Return the answer with unchanged keys and translated values.
     Return the only dict answer with the key 'result' and not use [].
     """
