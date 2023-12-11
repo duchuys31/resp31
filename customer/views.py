@@ -30,7 +30,7 @@ def openai(prompt):
  
 def detech_language(content):
     prompt = f"""
-    I have the following text, help me identify the language used in this text is 'Vietnamese' or 'English', provide the most common language:
+    I have the following text, help me identify the language used in this text is 'Vietnamese', 'English' or '', provide the most common language:
     [{content}]
     Provide the unique language (Ex: 'English')
     If unable to determine language, return value of language is ''.
@@ -42,7 +42,7 @@ def translate_language(customer, content):
     prompt = f"""
     I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:
     [{content}]
-    For value, capitalize the first letter of the sentence and after punctuation if present.
+    For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.
     Return values by {customer.language}
     Return the answer with unchanged keys and translated values.
     Return the only dict answer with the key 'result' and not use [].
@@ -55,6 +55,7 @@ def clean_text(content):
     [{content}]
     - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
     - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
+    - For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.
     - Return the only dict answer with the key 'result'.
     """
     print(prompt)

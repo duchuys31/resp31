@@ -582,7 +582,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text is 'Vietnamese' or 'English', provide the most common language:\n    [{content}]\n    Provide the unique language (Ex: 'English')\n    If unable to determine language, return value of language is ''.\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):",
+        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text is 'Vietnamese', 'English' or '', provide the most common language:\n    [{content}]\n    Provide the unique language (Ex: 'English')\n    If unable to determine language, return value of language is ''.\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -591,7 +591,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    For value, capitalize the first letter of the sentence and after punctuation if present.\n    Return values by {customer.language}\n    Return the answer with unchanged keys and translated values.\n    Return the only dict answer with the key 'result' and not use [].\n    \"\"\"\n    return openai(prompt)",
+        "peekOfCode": "def translate_language(customer, content):\n    prompt = f\"\"\"\n    I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:\n    [{content}]\n    For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.\n    Return values by {customer.language}\n    Return the answer with unchanged keys and translated values.\n    Return the only dict answer with the key 'result' and not use [].\n    \"\"\"\n    return openai(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -600,7 +600,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - Return the only dict answer with the key 'result'.\n    \"\"\"\n    print(prompt)\n    return openai(prompt)",
+        "peekOfCode": "def clean_text(content): \n    prompt = f\"\"\"\n    I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.\n    [{content}]\n    - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.\n    - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.\n    - For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.\n    - Return the only dict answer with the key 'result'.\n    \"\"\"\n    print(prompt)",
         "detail": "customer.views",
         "documentation": {}
     },
