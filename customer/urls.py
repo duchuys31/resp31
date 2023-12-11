@@ -23,5 +23,5 @@ urlpatterns = [
     path('clean_data', views.clean_data), 
     path('send_notifi', views.send_notifi), 
     path('save_data', views.save_data), 
-    
+    path('cancel', views.cancel), 
 ]

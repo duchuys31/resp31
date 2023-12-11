@@ -33,6 +33,14 @@
         "documentation": {}
     },
     {
+        "label": "History",
+        "importPath": "customer.models",
+        "description": "customer.models",
+        "isExtraImport": true,
+        "detail": "customer.models",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -170,11 +178,36 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
         "isExtraImport": true,
         "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
         "documentation": {}
     },
     {
@@ -259,6 +292,14 @@
     },
     {
         "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
         "importPath": "datetime",
         "description": "datetime",
         "isExtraImport": true,
@@ -542,6 +583,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0004_history",
+        "description": "customer.migrations.0004_history",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0003_customer_sum_reservation_customer_time_end_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='History',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('time_start', models.DateTimeField(blank=True, null=True)),",
+        "detail": "customer.migrations.0004_history",
+        "documentation": {}
+    },
+    {
         "label": "CustomerConfig",
         "kind": 6,
         "importPath": "customer.apps",
@@ -555,7 +605,16 @@
         "kind": 6,
         "importPath": "customer.models",
         "description": "customer.models",
-        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")\n    sum_reservation = models.IntegerField(default=0)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
+        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")\n    sum_reservation = models.IntegerField(default=0)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)\nclass History(models.Model):\n    custumer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
+        "detail": "customer.models",
+        "documentation": {}
+    },
+    {
+        "label": "History",
+        "kind": 6,
+        "importPath": "customer.models",
+        "description": "customer.models",
+        "peekOfCode": "class History(models.Model):\n    custumer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
         "detail": "customer.models",
         "documentation": {}
     },
@@ -564,7 +623,7 @@
         "kind": 5,
         "importPath": "customer.urls",
         "description": "customer.urls",
-        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n]",
+        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n    path('cancel', views.cancel), \n]",
         "detail": "customer.urls",
         "documentation": {}
     },
@@ -650,11 +709,29 @@
         "documentation": {}
     },
     {
+        "label": "cancel",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def cancel(request):\n    try:\n        customer = request.customer\n        customer.sum_reservation = None\n        customer.time_start = None\n        customer.time_end = None\n        customer.save()\n    except Exception as e:\n        print(str(e))\n    return Response(status=200)",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "check",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def check(request): \n    try:\n        customer = request.customer \n        time_now = datetime.now()\n        time_now = time_now.strftime('%d-%m-%Y %H:%M')\n        if customer.time_start >= time_now:\n            History.objects.create(\n                customer = customer,\n                time_start = customer.time_start,\n                time_end = customer.time_end",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
         "label": "send_notifi",
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    time_now = time_now.strftime('%d-%m-%Y %H:%M')\n    success = 1\n    if time_now > customer.time_end:\n        success = 0\n    return Response({\n        'set_attributes': {\n            'success': success",
+        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    time_now = time_now.strftime('%d-%m-%Y %H:%M')\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        success = 1\n    return Response({",
         "detail": "customer.views",
         "documentation": {}
     },

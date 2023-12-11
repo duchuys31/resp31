@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
-from customer.models import Customer
+from customer.models import Customer, History
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.decorators import action
 from django.db.models import Sum
@@ -117,8 +117,16 @@ def clean_data(request):
     resp = clean_text(content)
     try:
         try:
-            datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
-            datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
+            time_now = datetime.now()
+            time_now = time_now.strftime('%d-%m-%Y %H:%M')
+            start_time = datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
+            end_time = datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
+            if end_time < start_time or start_time < time_now:
+                return Response({
+                'set_sttributes': {
+                    'success': 0
+                }
+            })
             int(resp['result']['number_people'])
         except Exception as e:
             print(str(e))
@@ -154,22 +162,53 @@ def save_data(request):
             'residual': 4 - int(request.data['number_people']) % 4
         }
     })
+    
+@api_view(['POST'])
+def cancel(request):
+    try:
+        customer = request.customer
+        customer.sum_reservation = None
+        customer.time_start = None
+        customer.time_end = None
+        customer.save()
+    except Exception as e:
+        print(str(e))
+    return Response(status=200)
+
+
+@api_view(['POST'])
+def check(request): 
+    try:
+        customer = request.customer 
+        time_now = datetime.now()
+        time_now = time_now.strftime('%d-%m-%Y %H:%M')
+        if customer.time_start >= time_now:
+            History.objects.create(
+                customer = customer,
+                time_start = customer.time_start,
+                time_end = customer.time_end
+            )
+    except Exception as e:
+        print(str(e))
+    return Response(status=200)
 
 @api_view(['GET'])
 def send_notifi(request): 
     customer = request.customer
     time_now = datetime.now()
     time_now = time_now.strftime('%d-%m-%Y %H:%M')
-    success = 1
-    
-    if time_now > customer.time_end:
-        success = 0
-    
+    two_hours_ago = time_now - timedelta(hours=2)
+    success = 0
+    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)
+    if len(histories) > 0:
+        success = 1
     return Response({
         'set_attributes': {
             'success': success
         }
     })
+    
+
 
 
 
