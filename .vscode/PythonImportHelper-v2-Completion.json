@@ -582,7 +582,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language:\n    [{content}]\n    Provide the unique language (Ex: 'English')\n    If unable to determine language, return ''.\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):",
+        "peekOfCode": "def detech_language(content):\n    prompt = f\"\"\"\n    I have the following text, help me identify the language used in this text, provide the most common language:\n    [{content}]\n    Provide the unique language (Ex: 'English')\n    If unable to determine language, return value of language is ''.\n    Return the answer with the key 'language'.\n    \"\"\"\n    return openai(prompt)\ndef translate_language(customer, content):",
         "detail": "customer.views",
         "documentation": {}
     },
