@@ -16,7 +16,10 @@ class CustomMiddleware:
                 customer = Customer.objects.create(sender_id=data['sender_id'])
             
             try:
-                customer.language = detech_language(data['sender_input'])['language'] 
+                if '##' in data['sender_input']:
+                    customer.language = detech_language(data['sender_input'].split('##')[1])['language'] 
+                else:
+                    customer.language = detech_language(data['sender_input'])['language'] 
             except: 
                 customer.language = 'Vietnamese'
             customer.save()
