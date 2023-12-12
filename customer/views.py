@@ -191,7 +191,7 @@ def check(request):
         print(str(e))
     return Response(status=200)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def send_notifi(request): 
     customer = request.customer
     time_now = datetime.now()
