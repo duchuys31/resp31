@@ -731,7 +731,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        success = 1\n    return Response({\n        'set_attributes': {",
+        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
         "detail": "customer.views",
         "documentation": {}
     },

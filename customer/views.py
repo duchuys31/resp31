@@ -199,6 +199,7 @@ def send_notifi(request):
     success = 0
     histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)
     if len(histories) > 0:
+        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()
         success = 1
     return Response({
         'set_attributes': {
