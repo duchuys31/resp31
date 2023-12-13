@@ -42,24 +42,33 @@ def translate_language(customer, content):
     prompt = f"""
     I have the following dictionary, help me translate the values of this dictionary into  {customer.language}:
     [{content}]
+    For the values, ensure that the returned results are spelled correctly and use regular writing style.
     For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.
     Return values by {customer.language}
     Return the answer with unchanged keys and translated values.
     Return the only dict answer with the key 'result' and not use [].
     """
-    return openai(prompt)
+    print(prompt)
+    data = openai(prompt)
+    if '[' in data['result'] and ']' in data['result']:
+        data['result'] = data['result'].replace('[', '').replace(']', '')
+    return data
 
 def clean_text(content): 
     prompt = f"""
     I have a dictionary here, and there's a section with keys and values where the values are not returning in the correct data type.
     [{content}]
+    - For the values, ensure that the returned results are spelled correctly and use regular writing style.
     - With the 'order_date' key and the 'order_date_end' key, take the value of the key and adjust it to the correct format %d-%m-%Y %H:%M.
     - With the key 'number_people,' retrieve the meaningful numeric content within the value of the key and convert it to the correct integer format.
     - For value, capitalize the first letter if the word is a person's name or starts a sentence; after punctuation marks if any, otherwise use lowercase letters.
     - Return the only dict answer with the key 'result'.
     """
     print(prompt)
-    return openai(prompt)
+    data = openai(prompt)
+    if '[' in data['result'] and ']' in data['result']:
+        data['result'] = data['result'].replace('[', '').replace(']', '')
+    return data
     
 
 @api_view(['POST'])
@@ -206,6 +215,8 @@ def send_notifi(request):
             'success': success
         }
     })
+    
+
     
 
 
