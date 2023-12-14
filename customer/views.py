@@ -244,6 +244,7 @@ def cron(request):
         customer.sum_reservation = 0
         customer.save()
     time_check = time_now - timedelta(hours=2)
+    time_check = time_now
     histories = History.objects.filter(time_end__lt=time_check)
     url = "https://bot.fpt.ai/api/get_answer/"
 
