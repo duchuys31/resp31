@@ -169,10 +169,9 @@ def save_data(request):
     
     total_sum_reservation = 0
     for x in customers:
+        print(x.time_start, x.time_end)
         total_sum_reservation += x.sum_reservation
     print(total_sum_reservation)
-    if total_sum_reservation is None:
-        total_sum_reservation = 0
     success = 1
     if total_sum_reservation + customer.sum_reservation <= 10:
         customer.save()
@@ -249,7 +248,7 @@ def language(request):
 @api_view(['GET'])
 def cron(request):
     time_now = datetime.now() + timedelta(hours=7)
-    customers = Customer.objects.filter(time_start__gt=time_now)
+    customers = Customer.objects.filter(time_start__lte=time_now)
     for customer in customers: 
         History.objects.create(
             customer = customer,

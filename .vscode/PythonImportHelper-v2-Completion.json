@@ -825,7 +825,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def cron(request):\n    time_now = datetime.now() + timedelta(hours=7)\n    customers = Customer.objects.filter(time_start__gt=time_now)\n    for customer in customers: \n        History.objects.create(\n            customer = customer,\n            time_start = customer.time_start,\n            time_end = customer.time_end\n        )\n        customer.time_start = None",
+        "peekOfCode": "def cron(request):\n    time_now = datetime.now() + timedelta(hours=7)\n    customers = Customer.objects.filter(time_start__lte=time_now)\n    for customer in customers: \n        History.objects.create(\n            customer = customer,\n            time_start = customer.time_start,\n            time_end = customer.time_end\n        )\n        customer.time_start = None",
         "detail": "customer.views",
         "documentation": {}
     },
