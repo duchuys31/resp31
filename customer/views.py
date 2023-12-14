@@ -215,7 +215,16 @@ def send_notifi(request):
             'success': success
         }
     })
-    
+@api_view(['POST'])
+def language(request):
+    customer = request.customer
+    customer.language = request.data['language']
+    customer.save()
+    return Response({
+        'set_attributes': {
+            'success': 1
+        }
+    })
 
     
 

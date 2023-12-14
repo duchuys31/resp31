@@ -623,7 +623,7 @@
         "kind": 5,
         "importPath": "customer.urls",
         "description": "customer.urls",
-        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n    path('cancel', views.cancel), \n    path('check', views.check), \n]",
+        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n    path('cancel', views.cancel), \n    path('check', views.check), \n    path('language', views.language), \n]",
         "detail": "customer.urls",
         "documentation": {}
     },
@@ -732,6 +732,15 @@
         "importPath": "customer.views",
         "description": "customer.views",
         "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "language",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def language(request):\n    customer = request.customer\n    customer.language = request.data['language']\n    customer.save()\n    return Response({\n        'set_attributes': {\n            'success': 1\n        }\n    })",
         "detail": "customer.views",
         "documentation": {}
     },

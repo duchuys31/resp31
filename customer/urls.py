@@ -25,4 +25,5 @@ urlpatterns = [
     path('save_data', views.save_data), 
     path('cancel', views.cancel), 
     path('check', views.check), 
+    path('language', views.language), 
 ]
