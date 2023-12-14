@@ -789,7 +789,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def cancel(request):\n    try:\n        customer = request.customer\n        customer.sum_reservation = None\n        customer.time_start = None\n        customer.time_end = None\n        customer.save()\n    except Exception as e:\n        print(str(e))\n    return Response(status=200)",
+        "peekOfCode": "def cancel(request):\n    try:\n        customer = request.customer\n        customer.sum_reservation = 0\n        customer.time_start = None\n        customer.time_end = None\n        customer.save()\n    except Exception as e:\n        print(str(e))\n    return Response(status=200)",
         "detail": "customer.views",
         "documentation": {}
     },

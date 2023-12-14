@@ -194,7 +194,7 @@ def save_data(request):
 def cancel(request):
     try:
         customer = request.customer
-        customer.sum_reservation = None
+        customer.sum_reservation = 0
         customer.time_start = None
         customer.time_end = None
         customer.save()
