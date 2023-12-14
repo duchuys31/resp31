@@ -356,14 +356,6 @@
         "documentation": {}
     },
     {
-        "label": "timezone",
-        "importPath": "django.utils",
-        "description": "django.utils",
-        "isExtraImport": true,
-        "detail": "django.utils",
-        "documentation": {}
-    },
-    {
         "label": "Sum",
         "importPath": "django.db.models",
         "description": "django.db.models",
@@ -798,7 +790,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def check(request): \n    try:\n        customer = request.customer \n        time_now = timezone.now() + timedelta(hours=7)\n        time_now = time_now.strftime('%d-%m-%Y %H:%M')\n        if customer.time_start >= time_now:\n            History.objects.create(\n                customer = customer,\n                time_start = customer.time_start,\n                time_end = customer.time_end",
+        "peekOfCode": "def check(request): \n    try:\n        customer = request.customer \n        time_now = datetime.now() + timedelta(hours=7)\n        time_now = time_now.strftime('%d-%m-%Y %H:%M')\n        if customer.time_start >= time_now:\n            History.objects.create(\n                customer = customer,\n                time_start = customer.time_start,\n                time_end = customer.time_end",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -807,7 +799,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = timezone.now() + timedelta(hours=7)\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
+        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now() + timedelta(hours=7)\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -825,7 +817,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def cron(request):\n    time_now = timezone.now() + timedelta(hours=7)\n    customers = Customer.objects.filter(time_start__gt=time_now)\n    for customer in customers: \n        History.objects.create(\n            customer = customer,\n            time_start = customer.time_start,\n            time_end = customer.time_end\n        )\n        customer.time_start = None",
+        "peekOfCode": "def cron(request):\n    time_now = datetime.now() + timedelta(hours=7)\n    customers = Customer.objects.filter(time_start__gt=time_now)\n    for customer in customers: \n        History.objects.create(\n            customer = customer,\n            time_start = customer.time_start,\n            time_end = customer.time_end\n        )\n        customer.time_start = None",
         "detail": "customer.views",
         "documentation": {}
     },

@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.decorators import action
 import requests
-from django.utils import timezone
 from django.db.models import Sum
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
@@ -129,7 +128,7 @@ def clean_data(request):
     resp = clean_text(content)
     try:
         try:
-            time_now = timezone.now() + timedelta(hours=7)
+            time_now = datetime.now() + timedelta(hours=7)
             start_time = datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
             end_time = datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
             if end_time < start_time or start_time < time_now:
@@ -191,7 +190,7 @@ def cancel(request):
 def check(request): 
     try:
         customer = request.customer 
-        time_now = timezone.now() + timedelta(hours=7)
+        time_now = datetime.now() + timedelta(hours=7)
         time_now = time_now.strftime('%d-%m-%Y %H:%M')
         if customer.time_start >= time_now:
             History.objects.create(
@@ -206,7 +205,7 @@ def check(request):
 @api_view(['POST'])
 def send_notifi(request): 
     customer = request.customer
-    time_now = timezone.now() + timedelta(hours=7)
+    time_now = datetime.now() + timedelta(hours=7)
     two_hours_ago = time_now - timedelta(hours=2)
     success = 0
     histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)
@@ -231,7 +230,7 @@ def language(request):
     
 @api_view(['GET'])
 def cron(request):
-    time_now = timezone.now() + timedelta(hours=7)
+    time_now = datetime.now() + timedelta(hours=7)
     customers = Customer.objects.filter(time_start__gt=time_now)
     for customer in customers: 
         History.objects.create(
