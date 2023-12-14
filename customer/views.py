@@ -53,7 +53,8 @@ def translate_language(customer, content):
     print(prompt)
     data = openai(prompt)
     if '[' in data['result'] and ']' in data['result']:
-        data['result'] = data['result'].replace('[', '').replace(']', '')
+        if data['result'].startswith('[') and data['result'].endswith(']'):
+            data['result'] = data['result'][1:-1]
     return data
 
 def clean_text(content): 
@@ -69,7 +70,9 @@ def clean_text(content):
     print(prompt)
     data = openai(prompt)
     if '[' in data['result'] and ']' in data['result']:
-        data['result'] = data['result'].replace('[', '').replace(']', '')
+        if data['result'].startswith('[') and data['result'].endswith(']'):
+            data['result'] = data['result'][1:-1]
+
     return data
     
 
