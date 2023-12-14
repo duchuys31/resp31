@@ -153,6 +153,9 @@ def clean_data(request):
 @api_view(['POST'])
 def save_data(request): 
     customer = request.customer
+    customer.time_start =   None
+    customer.time_end =  None
+    customer.sum_reservation = 0
     customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')
     customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
     customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 > 0)
@@ -172,6 +175,11 @@ def save_data(request):
         customer.save()
     else: 
         success = 0
+    print({
+            'success': success,
+            'number_order': customer.sum_reservation,
+            'residual': 4 - int(request.data['number_people']) % 4
+    })
     return Response({
         'set_attributes': {
             'success': success,
