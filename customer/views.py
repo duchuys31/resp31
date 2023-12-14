@@ -9,6 +9,7 @@ import json
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+from django.utils import timezone
 import requests
 from django.db.models import Sum
 load_dotenv()
@@ -156,16 +157,18 @@ def save_data(request):
     customer.time_start =   None
     customer.time_end =  None
     customer.sum_reservation = 0
+    customer.save()
     customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')
     customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
     customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 > 0)
-    customers_in_range = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)
-    print("####################")
-    print(customers_in_range)
-    print("####################")
+    customers = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)
+    # customers = Customer.objects.all()
+    # print("####################")
+    # print(customers_in_range)
+    # print("####################")
     
     total_sum_reservation = 0
-    for x in customers_in_range:
+    for x in customers:
         total_sum_reservation += x.sum_reservation
     print(total_sum_reservation)
     if total_sum_reservation is None:

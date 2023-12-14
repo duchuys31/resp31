@@ -347,6 +347,14 @@
         "documentation": {}
     },
     {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -772,7 +780,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def save_data(request): \n    customer = request.customer\n    customer.time_start =   None\n    customer.time_end =  None\n    customer.sum_reservation = 0\n    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')\n    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')\n    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 > 0)\n    customers_in_range = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)\n    print(\"####################\")",
+        "peekOfCode": "def save_data(request): \n    customer = request.customer\n    customer.time_start =   None\n    customer.time_end =  None\n    customer.sum_reservation = 0\n    customer.save()\n    customer.time_start =   datetime.strptime(request.data['order_date'], '%d-%m-%Y %H:%M')\n    customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')\n    customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 > 0)\n    customers = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)",
         "detail": "customer.views",
         "documentation": {}
     },
