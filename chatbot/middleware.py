@@ -15,6 +15,8 @@ class CustomMiddleware:
             except:
                 customer = Customer.objects.create(sender_id=data['sender_id'])
                 customer.language = 'English'
+            if len(data['channel']) > 0:
+                customer.channel = data['channel']
             customer.save()
             request.customer = customer
         except Exception as e: 

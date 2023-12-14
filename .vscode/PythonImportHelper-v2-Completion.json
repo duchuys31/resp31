@@ -194,6 +194,38 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -312,6 +344,23 @@
         "description": "rest_framework.views",
         "isExtraImport": true,
         "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "django.utils",
+        "description": "django.utils",
+        "isExtraImport": true,
+        "detail": "django.utils",
         "documentation": {}
     },
     {
@@ -479,25 +528,7 @@
         "kind": 5,
         "importPath": "chatbot.settings",
         "description": "chatbot.settings",
-        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "chatbot.settings",
-        "documentation": {}
-    },
-    {
-        "label": "TIME_ZONE",
-        "kind": 5,
-        "importPath": "chatbot.settings",
-        "description": "chatbot.settings",
-        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
-        "detail": "chatbot.settings",
-        "documentation": {}
-    },
-    {
-        "label": "USE_I18N",
-        "kind": 5,
-        "importPath": "chatbot.settings",
-        "description": "chatbot.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nUSE_TZ = True\nTIME_ZONE = 'Europe/London'\nUSE_I18N = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "chatbot.settings",
         "documentation": {}
     },
@@ -506,7 +537,25 @@
         "kind": 5,
         "importPath": "chatbot.settings",
         "description": "chatbot.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
+        "peekOfCode": "USE_TZ = True\nTIME_ZONE = 'Europe/London'\nUSE_I18N = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
+        "detail": "chatbot.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "chatbot.settings",
+        "description": "chatbot.settings",
+        "peekOfCode": "TIME_ZONE = 'Europe/London'\nUSE_I18N = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
+        "detail": "chatbot.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "chatbot.settings",
+        "description": "chatbot.settings",
+        "peekOfCode": "USE_I18N = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nAPPEND_SLASH = False",
         "detail": "chatbot.settings",
         "documentation": {}
     },
@@ -592,6 +641,33 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0005_customer_channel_history_channel",
+        "description": "customer.migrations.0005_customer_channel_history_channel",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0004_history'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='customer',\n            name='channel',\n            field=models.TextField(default='livechat'),\n        ),",
+        "detail": "customer.migrations.0005_customer_channel_history_channel",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0006_remove_history_channel",
+        "description": "customer.migrations.0006_remove_history_channel",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0005_customer_channel_history_channel'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='history',\n            name='channel',\n        ),\n    ]",
+        "detail": "customer.migrations.0006_remove_history_channel",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "customer.migrations.0007_rename_custumer_history_customer",
+        "description": "customer.migrations.0007_rename_custumer_history_customer",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('customer', '0006_remove_history_channel'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='history',\n            old_name='custumer',\n            new_name='customer',\n        ),",
+        "detail": "customer.migrations.0007_rename_custumer_history_customer",
+        "documentation": {}
+    },
+    {
         "label": "CustomerConfig",
         "kind": 6,
         "importPath": "customer.apps",
@@ -605,7 +681,7 @@
         "kind": 6,
         "importPath": "customer.models",
         "description": "customer.models",
-        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")\n    sum_reservation = models.IntegerField(default=0)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)\nclass History(models.Model):\n    custumer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
+        "peekOfCode": "class Customer(models.Model): \n    sender_id = models.TextField(primary_key=True)\n    language = models.TextField(default=\"Vietnamese\")\n    sum_reservation = models.IntegerField(default=0)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)\n    channel = models.TextField(default=\"livechat\")\nclass History(models.Model):\n    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)",
         "detail": "customer.models",
         "documentation": {}
     },
@@ -614,7 +690,7 @@
         "kind": 6,
         "importPath": "customer.models",
         "description": "customer.models",
-        "peekOfCode": "class History(models.Model):\n    custumer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
+        "peekOfCode": "class History(models.Model):\n    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)\n    time_start = models.DateTimeField(null=True, blank=True)\n    time_end = models.DateTimeField(null=True, blank=True)",
         "detail": "customer.models",
         "documentation": {}
     },
@@ -623,7 +699,7 @@
         "kind": 5,
         "importPath": "customer.urls",
         "description": "customer.urls",
-        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n    path('cancel', views.cancel), \n    path('check', views.check), \n    path('language', views.language), \n]",
+        "peekOfCode": "urlpatterns = [\n    path('change_message', views.change_message),\n    path('change_menu', views.change_menu),\n    path('clean_data', views.clean_data), \n    path('send_notifi', views.send_notifi), \n    path('save_data', views.save_data), \n    path('cancel', views.cancel), \n    path('check', views.check), \n    path('language', views.language), \n    path('cron', views.cron), ",
         "detail": "customer.urls",
         "documentation": {}
     },
@@ -677,7 +753,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def change_menu(request): \n    customer = request.customer\n    to_translate = request.data\n    to_translate.pop('sender_id')\n    to_translate.pop('sender_input')\n    to_translate = json.dumps(to_translate)  \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)['result']}) \n    except: \n        return Response({\"set_attributes\": json.loads(to_translate)}) ",
+        "peekOfCode": "def change_menu(request): \n    customer = request.customer\n    to_translate = request.data\n    to_translate.pop('sender_id')\n    to_translate.pop('sender_input')\n    to_translate.pop('channel')\n    to_translate = json.dumps(to_translate)  \n    try:\n        return Response({\"set_attributes\":  translate_language(customer, to_translate)['result']}) \n    except: ",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -722,7 +798,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def check(request): \n    try:\n        customer = request.customer \n        time_now = datetime.now()\n        time_now = time_now.strftime('%d-%m-%Y %H:%M')\n        if customer.time_start >= time_now:\n            History.objects.create(\n                customer = customer,\n                time_start = customer.time_start,\n                time_end = customer.time_end",
+        "peekOfCode": "def check(request): \n    try:\n        customer = request.customer \n        time_now = timezone.now() + timedelta(hours=7)\n        time_now = time_now.strftime('%d-%m-%Y %H:%M')\n        if customer.time_start >= time_now:\n            History.objects.create(\n                customer = customer,\n                time_start = customer.time_start,\n                time_end = customer.time_end",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -731,7 +807,7 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = datetime.now()\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
+        "peekOfCode": "def send_notifi(request): \n    customer = request.customer\n    time_now = timezone.now() + timedelta(hours=7)\n    two_hours_ago = time_now - timedelta(hours=2)\n    success = 0\n    histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)\n    if len(histories) > 0:\n        History.objects.filter(custumer=customer, time_end__gt=two_hours_ago).delete()\n        success = 1\n    return Response({",
         "detail": "customer.views",
         "documentation": {}
     },
@@ -740,7 +816,16 @@
         "kind": 2,
         "importPath": "customer.views",
         "description": "customer.views",
-        "peekOfCode": "def language(request):\n    customer = request.customer\n    customer.language = request.data['language']\n    customer.save()\n    return Response({\n        'set_attributes': {\n            'success': 1\n        }\n    })",
+        "peekOfCode": "def language(request):\n    customer = request.customer\n    customer.language = request.data['language']\n    customer.save()\n    return Response({\n        'set_attributes': {\n            'success': 1\n        }\n    })\n@api_view(['GET'])",
+        "detail": "customer.views",
+        "documentation": {}
+    },
+    {
+        "label": "cron",
+        "kind": 2,
+        "importPath": "customer.views",
+        "description": "customer.views",
+        "peekOfCode": "def cron(request):\n    time_now = timezone.now() + timedelta(hours=7)\n    customers = Customer.objects.filter(time_start__gt=time_now)\n    for customer in customers: \n        History.objects.create(\n            customer = customer,\n            time_start = customer.time_start,\n            time_end = customer.time_end\n        )\n        customer.time_start = None",
         "detail": "customer.views",
         "documentation": {}
     },

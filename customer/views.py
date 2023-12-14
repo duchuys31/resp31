@@ -9,6 +9,8 @@ import json
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+import requests
+from django.utils import timezone
 from django.db.models import Sum
 load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_APIKEY"))
@@ -87,6 +89,7 @@ def change_menu(request):
     to_translate = request.data
     to_translate.pop('sender_id')
     to_translate.pop('sender_input')
+    to_translate.pop('channel')
     to_translate = json.dumps(to_translate)  
     try:
         return Response({"set_attributes":  translate_language(customer, to_translate)['result']}) 
@@ -126,7 +129,7 @@ def clean_data(request):
     resp = clean_text(content)
     try:
         try:
-            time_now = datetime.now()
+            time_now = timezone.now() + timedelta(hours=7)
             start_time = datetime.strptime(resp['result']['order_date'], '%d-%m-%Y %H:%M')
             end_time = datetime.strptime(resp['result']['order_date_end'], '%d-%m-%Y %H:%M')
             if end_time < start_time or start_time < time_now:
@@ -188,7 +191,7 @@ def cancel(request):
 def check(request): 
     try:
         customer = request.customer 
-        time_now = datetime.now()
+        time_now = timezone.now() + timedelta(hours=7)
         time_now = time_now.strftime('%d-%m-%Y %H:%M')
         if customer.time_start >= time_now:
             History.objects.create(
@@ -203,7 +206,7 @@ def check(request):
 @api_view(['POST'])
 def send_notifi(request): 
     customer = request.customer
-    time_now = datetime.now()
+    time_now = timezone.now() + timedelta(hours=7)
     two_hours_ago = time_now - timedelta(hours=2)
     success = 0
     histories = History.objects.filter(custumer=customer, time_end__gt=two_hours_ago)
@@ -225,6 +228,48 @@ def language(request):
             'success': 1
         }
     })
+    
+@api_view(['GET'])
+def cron(request):
+    time_now = timezone.now() + timedelta(hours=7)
+    customers = Customer.objects.filter(time_start__gt=time_now)
+    for customer in customers: 
+        History.objects.create(
+            customer = customer,
+            time_start = customer.time_start,
+            time_end = customer.time_end
+        )
+        customer.time_start = None
+        customer.time_end = None
+        customer.sum_reservation = 0
+        customer.save()
+    time_check = time_now - timedelta(hours=2)
+    histories = History.objects.filter(time_end__lt=time_check)
+    url = "https://bot.fpt.ai/api/get_answer/"
+
+    headers = {
+    'Authorization': 'Bearer 5f20b8670f8bc8f4ded9d0395dd32137',
+    'Content-Type': 'application/json'
+    }
+    for history in histories:
+        payload = json.dumps({
+            "message": {
+                "content": "Feedback#",
+                "type": "payload"
+            },
+            "app_code": "f08cb3bbb17d7db0f09c9ad84e8206a3",
+            "sender_id": history.customer.sender_id,
+            "channel": history.customer.channel
+        })
+        response = requests.request("POST", url, headers=headers, data=payload)
+    return Response(str(time_now))
+        
+        
+        
+        
+    
+    
+    
 
     
 

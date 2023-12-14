@@ -26,4 +26,5 @@ urlpatterns = [
     path('cancel', views.cancel), 
     path('check', views.check), 
     path('language', views.language), 
+    path('cron', views.cron), 
 ]
