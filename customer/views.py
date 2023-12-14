@@ -262,6 +262,7 @@ def cron(request):
             "channel": history.customer.channel
         })
         response = requests.request("POST", url, headers=headers, data=payload)
+        history.delete()
     return Response(str(time_now))
         
         
