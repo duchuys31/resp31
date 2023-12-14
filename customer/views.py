@@ -157,7 +157,14 @@ def save_data(request):
     customer.time_end =   datetime.strptime(request.data['order_date_end'], '%d-%m-%Y %H:%M')
     customer.sum_reservation = int(request.data['number_people']) // 4 + (int(request.data['number_people']) % 4 > 0)
     customers_in_range = Customer.objects.filter(time_start__lte=customer.time_end, time_end__gte=customer.time_start)
-    total_sum_reservation = customers_in_range.aggregate(Sum('sum_reservation'))['sum_reservation__sum']
+    print("####################")
+    print(customers_in_range)
+    print("####################")
+    
+    total_sum_reservation = 0
+    for x in customers_in_range:
+        total_sum_reservation += x.sum_reservation
+    print(total_sum_reservation)
     if total_sum_reservation is None:
         total_sum_reservation = 0
     success = 1
